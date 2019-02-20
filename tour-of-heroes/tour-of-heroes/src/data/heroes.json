@@ -1,0 +1,32 @@
+{
+  "heroes": [
+    {
+      "id": 15,
+      "name": "Magnetas"
+    },
+    {
+      "id": 16,
+      "name": "RubberMan"
+    },
+    {
+      "id": 17,
+      "name": "Dynama"
+    },
+    {
+      "id": 18,
+      "name": "Magma"
+    },
+    {
+      "id": 19,
+      "name": "Tornado"
+    },
+    {
+      "name": "Andri",
+      "id": 20
+    },
+    {
+      "name": "XYZ",
+      "id": 21
+    }
+  ]
+}
