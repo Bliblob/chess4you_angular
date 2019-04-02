@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { identifierModuleUrl } from '@angular/compiler';
+import { ResultService } from '../result.service';
+import { HttpClientModule } from '@angular/common/http'; import { HttpModule } from '@angular/http';
 
 @Component({
   selector: 'app-heroes',
@@ -12,14 +14,17 @@ import { identifierModuleUrl } from '@angular/compiler';
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService,
+    private resultService: ResultService) { }
 
   ngOnInit() {
     this.getHeroes();
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
+    /* this.heroService.getHeroes()
+    .subscribe(heroes => this.heroes = heroes); */
+    this.resultService.getHeroes()
     .subscribe(heroes => this.heroes = heroes);
   }
 
@@ -32,15 +37,20 @@ export class HeroesComponent implements OnInit {
     }
     id = this.heroes[this.heroes.length - 1].id + 1; // get the last object in list an increase the value of id
 
-    this.heroService.addHero({ id, name } as Hero)
+    /* this.heroService.addHero({ id, name } as Hero)
       .subscribe(hero => {
         this.heroes.push(hero);
-      });
+      }); */
+    this.resultService.addHero({id, name} as Hero)
+    .subscribe(hero => {
+      this.heroes.push(hero);
+    });
   }
 
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
+    /* this.heroService.deleteHero(hero).subscribe(); */
+    this.resultService.deleteHero(hero).subscribe();
   }
 
 }
