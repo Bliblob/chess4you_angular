@@ -15,4 +15,8 @@ export class PlayerSearchComponent implements OnInit {
   searchForGame() {
     this.txtLoading = '↻...loading';
   }
+
+  loading(){
+    document.getElementById('searchGame').className = "button is-info is-outlined is-loading"
+  }
 }

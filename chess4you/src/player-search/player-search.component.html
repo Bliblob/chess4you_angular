@@ -1,3 +1,18 @@
-<h1>Chess4you</h1>
-<button (click)="searchForGame()">Search for a Game</button>
+<section class="hero is-info">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Chess4You
+        </h1>
+      </div>
+    </div>
+</section>
+<section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <a id="searchGame" (click)="loading()" class="button is-info is-outlined">Search for a Game</a><br><br>
+        <a id="showLobby" class="button is-info is-outlined">Show Lobby's</a>
+      </div>
+    </div>
+</section>
 <p>{{txtLoading}}</p>
