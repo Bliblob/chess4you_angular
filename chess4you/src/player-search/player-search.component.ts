@@ -16,7 +16,11 @@ export class PlayerSearchComponent implements OnInit {
     this.txtLoading = '↻...loading';
   }
 
-  loading(){
-    document.getElementById('searchGame').className = "button is-info is-outlined is-loading"
+  searchGame(){
+    document.getElementById('searchGame').className = "button is-info is-outlined is-loading";
+  }
+
+  showLobby(){
+    window.open('https://www.google.com', '_self');
   }
 }

@@ -7,12 +7,20 @@
       </div>
     </div>
 </section>
+
 <section class="hero">
     <div class="hero-body">
       <div class="container">
-        <a id="searchGame" (click)="loading()" class="button is-info is-outlined">Search for a Game</a><br><br>
-        <a id="showLobby" class="button is-info is-outlined">Show Lobby's</a>
+        <a id="searchGame" (click)="searchGame()" class="button is-info is-outlined">Search for a Game</a><br><br>
+        <a id="showLobby" routerLink="/lobby" class="button is-info is-outlined">Show Lobby's</a>
       </div>
     </div>
 </section>
-<p>{{txtLoading}}</p>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Chess4You</strong> by Yannick Zalokar, Andri Pierren, Livio Buergisser
+      </p>
+    </div>
+  </footer>

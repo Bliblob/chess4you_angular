@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { LobbySearchComponent } from '../lobby-search/lobby-search.component';
+
+const routes: Routes = [
+  { path: 'lobby', component: LobbySearchComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
