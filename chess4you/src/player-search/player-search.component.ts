@@ -21,6 +21,6 @@ export class PlayerSearchComponent implements OnInit {
   }
 
   showLobby(){
-    window.open('./lobby', '_self');
+    window.open('/lobby', '_self');
   }
 }
