@@ -12,4 +12,8 @@ export class LobbySearchComponent implements OnInit {
   ngOnInit() {
   }
 
+  joinLobby(){
+    document.getElementById('join').className = "button is-info is-inverted is-outlined is-loading has-background-white";
+  }
+
 }
