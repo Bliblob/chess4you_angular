@@ -12,15 +12,15 @@ export class PlayerSearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchForGame() {
-    this.txtLoading = '↻...loading';
-  }
+  //searchForGame() {
+    //this.txtLoading = '↻...loading';
+  //}
 
   searchGame(){
-    document.getElementById('searchGame').className = "button is-info is-outlined is-loading";
+    document.getElementById('searchGame').className = "button is-large is-info is-outlined is-loading";
   }
 
   showLobby(){
-    window.open('/lobby', '_self');
+    window.open("/lobby", "_self");
   }
 }
