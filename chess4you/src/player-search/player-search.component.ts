@@ -23,4 +23,8 @@ export class PlayerSearchComponent implements OnInit {
   showLobby(){
     window.open("/lobby", "_self");
   }
+
+  showBoard(){
+    window.open("/game", "_self");
+  }
 }
