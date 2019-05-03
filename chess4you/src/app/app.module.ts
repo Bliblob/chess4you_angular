@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { PlayerSearchComponent } from '../player-search/player-search.component';
 import { LobbySearchComponent } from '../lobby-search/lobby-search.component';
 import { ChessGameComponent } from '../chess-game/chess-game.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @NgModule({
    declarations: [
@@ -15,7 +16,8 @@ import { ChessGameComponent } from '../chess-game/chess-game.component';
       PlayerSearchComponent,
       LobbySearchComponent,
       ChessGameComponent,
-      ChessGameComponent
+      ChessGameComponent,
+      DashboardComponent
    ],
    imports: [
       BrowserModule,

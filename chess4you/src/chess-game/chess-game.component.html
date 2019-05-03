@@ -1,115 +1,22 @@
 <div class="container is-widescreen">
-  <nav class="breadcrumb" aria-label="breadcrumbs">
-    <ul>
-      <li><a href="#">Chess4You</a></li>
-      <li class="is-active"><a href="#" aria-current="page">Game</a></li>
-    </ul>
-  </nav>
-</div>
-
-<div class="container is-widescreen">
     <div class="notification has-background-light">
-      <h2 align="center" class="title is-2">Lobby: var lobbyNumber</h2>
-      <h4 align="center" class="title is-4">Enemy: var enemyName</h4>
+      <h2 align="center" class="title is-2">Lobby: {{Lobby?.Name}}</h2>
+      <div class="columns">
+        <div class="column">
+          <h4 align="left" class="title is-4">Player: {{Lobby?.PlayerOne?.Name.toUpperCase()}}</h4>
+        </div>
+        <div class="column">
+          <h4 align="center" class="title is-4">Vs.</h4>
+        </div>
+        <div class="column">
+          <h4 align="right" class="title is-4">Player: {{Lobby?.PlayerTwo?.Name.toUpperCase()}}</h4>
+        </div>
+      </div>
       <table align="center" class="table is-bordered" >
         <tbody *ngFor="let line of ChessBoard">
-          <td id="a7" width="100" height="100" [className]="line ? 'has-background-dark' : 'has-background-light'"></td>
+          <td *ngFor="let field of line.FieldLine" [id]="field.Id" width="75" height="75" [className]="field.Color ? 'has-background-dark' : 'has-background-light'"></td>
         </tbody>
         </table>
     </div>
-</div>
-
-<div class="container is-widescreen">
-  <div class="notification has-background-light">
-    <h2 align="center" class="title is-2">Lobby: var lobbyNumber</h2>
-    <h4 align="center" class="title is-4">Enemy: var enemyName</h4>
-    <table align="center" class="table is-bordered">
-      <thead>
-        <th id="a8" class="has-background-light"></th>
-        <th id="b8" width="100" height="100" class="has-background-dark"></th>
-        <th id="c8" width="100" height="100" class="has-background-light"></th>
-        <th id="d8" width="100" height="100" class="has-background-dark"></th>
-        <th id="e8" width="100" height="100" class="has-background-light"><img src="dame_weiss.png"alt="Dame"></th>
-        <th id="f8" width="100" height="100" class="has-background-dark"></th>
-        <th id="g8" width="100" height="100" class="has-background-light"></th>
-        <th id="h8" width="100" height="100" class="has-background-dark"></th>
-      </thead>
-      <tbody>
-        <td id="a7" width="100" height="100" class="has-background-dark"></td>
-        <td id="b7" width="100" height="100" class="has-background-light"></td>
-        <td id="c7" width="100" height="100" class="has-background-dark"></td>
-        <td id="d7" width="100" height="100" class="has-background-light"></td>
-        <td id="e7" width="100" height="100" class="has-background-dark"></td>
-        <td id="f7" width="100" height="100" class="has-background-light"></td>
-        <td id="g7" width="100" height="100" class="has-background-dark"></td>
-        <td id="h7" width="100" height="100" class="has-background-light"></td>
-      </tbody>
-      <tbody>
-        <td id="a6" width="100" height="100" class="has-background-light"></td>
-        <td id="b6" width="100" height="100" class="has-background-dark"></td>
-        <td id="c6" width="100" height="100" class="has-background-light"></td>
-        <td id="d6" width="100" height="100" class="has-background-dark"></td>
-        <td id="e6" width="100" height="100" class="has-background-light"></td>
-        <td id="f6" width="100" height="100" class="has-background-dark"></td>
-        <td id="g6" width="100" height="100" class="has-background-light"></td>
-        <td id="h6" width="100" height="100" class="has-background-dark"></td>
-      </tbody>
-      <tbody>
-        <td id="a5" width="100" height="100" class="has-background-dark"></td>
-        <td id="b5" width="100" height="100" class="has-background-light"></td>
-        <td id="c5" width="100" height="100" class="has-background-dark"></td>
-        <td id="d5" width="100" height="100" class="has-background-light"></td>
-        <td id="e5" width="100" height="100" class="has-background-dark"></td>
-        <td id="f5" width="100" height="100" class="has-background-light"></td>
-        <td id="g5" width="100" height="100" class="has-background-dark"></td>
-        <td id="h5" width="100" height="100" class="has-background-light"></td>
-      </tbody>
-      <tbody>
-        <td id="a4" width="100" height="100" class="has-background-light"></td>
-        <td id="b4" width="100" height="100" class="has-background-dark"></td>
-        <td id="c4" width="100" height="100" class="has-background-light"></td>
-        <td id="d4" width="100" height="100" class="has-background-dark"></td>
-        <td id="e4" width="100" height="100" class="has-background-light"></td>
-        <td id="f4" width="100" height="100" class="has-background-dark"></td>
-        <td id="g4" width="100" height="100" class="has-background-light"></td>
-        <td id="h4" width="100" height="100" class="has-background-dark"></td>
-      </tbody>
-      <tbody>
-        <td id="a3" width="100" height="100" class="has-background-dark"></td>
-        <td id="b3" width="100" height="100" class="has-background-light"></td>
-        <td id="c3" width="100" height="100" class="has-background-dark"></td>
-        <td id="d3" width="100" height="100" class="has-background-light"></td>
-        <td id="e3" width="100" height="100" class="has-background-dark"></td>
-        <td id="f3" width="100" height="100" class="has-background-light"></td>
-        <td id="g3" width="100" height="100" class="has-background-dark"></td>
-        <td id="h3" width="100" height="100" class="has-background-light"></td>
-      </tbody>
-      <tbody>
-        <td id="a2" width="100" height="100" class="has-background-light"></td>
-        <td id="b2" width="100" height="100" class="has-background-dark"></td>
-        <td id="c2" width="100" height="100" class="has-background-light"></td>
-        <td id="d2" width="100" height="100" class="has-background-dark"></td>
-        <td id="e2" width="100" height="100" class="has-background-light"></td>
-        <td id="f2" width="100" height="100" class="has-background-dark"></td>
-        <td id="g2" width="100" height="100" class="has-background-light"></td>
-        <td id="h2" width="100" height="100" class="has-background-dark"></td>
-      </tbody>
-      <tbody>
-        <td id="a1" width="100" height="100" class="has-background-dark"></td>
-        <td id="b1" width="100" height="100" class="has-background-light"></td>
-        <td id="c1" width="100" height="100" class="has-background-dark"></td>
-        <td id="d1" width="100" height="100" class="has-background-light"></td>
-        <td id="e1" width="100" height="100" class="has-background-dark"><</td>
-        <td id="f1" width="100" height="100" class="has-background-light"></td>
-        <td id="g1" width="100" height="100" class="has-background-dark"></td>
-        <td id="h1" width="100" height="100" class="has-background-light"></td>
-      </tbody>
-    </table>
-    <div align="right">
-        <div align="right">
-            <a href="./player-search.component.html" id="showLobby" class="button is-large is-info is-outlined">Leave</a>
-        </div>
-      </div>
-  </div>
 </div>
 

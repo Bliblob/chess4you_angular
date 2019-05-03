@@ -34,6 +34,9 @@ export class LobbySearchComponent implements OnInit {
     .subscribe(
       data => this.Lobby = data
     );
+    if (this.Lobby.PlayerTwo === null) {
+      
+    }
   }
   toggleModal(uuid: String) {
     this.ModalName = uuid;

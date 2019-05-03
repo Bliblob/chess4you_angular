@@ -21,4 +21,8 @@ export class LobbyService {
     return this.http.get<ILobby[]>(this.url + '/getListLobby');
   }
 
+  getLobby(uuid: String): Observable<ILobby> {
+    return this.http.get<ILobby>(this.url + '/getLobby/' + uuid);
+  }
+
 }
