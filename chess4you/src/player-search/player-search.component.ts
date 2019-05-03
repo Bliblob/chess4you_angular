@@ -12,10 +12,6 @@ export class PlayerSearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  //searchForGame() {
-    //this.txtLoading = '↻...loading';
-  //}
-
   searchGame(){
     document.getElementById('searchGame').className = "button is-large is-info is-outlined is-loading";
   }
