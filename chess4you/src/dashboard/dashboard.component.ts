@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LobbyService } from '../lobby.service';
 import { ILobby } from 'src/data-structure/Lobby';
-import { stringify } from '@angular/compiler/src/util';
 import { ActivatedRoute } from '@angular/router';
+import { ModalData } from 'src/data-structure/ModalData';
+import { MessageData } from 'src/data-structure/MessageData';
+import { LobbyData } from 'src/data-structure/LobbyData';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,17 +13,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  ListLobby: ILobby[];
-  Lobby: ILobby;
-  isSearchModalActive: Boolean = false;
-  isJoinModalActive: Boolean = false;
-  isSearching: Boolean = true;
-  isJoinSuccess: Boolean = false;
-  isMessageActive: Boolean = false;
-  Message: String;
+  lobby: ILobby;
+  listLobby: ILobby[];
 
-  uuid: String;
-  playerName: String;
+  modal: ModalData = new ModalData();
+  messageData: MessageData = new MessageData('', false);
+  lobbyData: LobbyData = new LobbyData();
 
   constructor(
     private lobbyService: LobbyService,
@@ -29,69 +26,118 @@ export class DashboardComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.getGame();
+    this.handleParam();
   }
 
-  getGame() {
+  handleParam() {
     if (this.route.snapshot.paramMap.get('uuid')) {
-      this.uuid = this.route.snapshot.paramMap.get('uuid');
+      this.lobbyData.uuid = this.route.snapshot.paramMap.get('uuid');
       this.toggleJoinModal();
     }
   }
 
-  searchLobbyModal() {
-    this.lobbyService.getListLobbys()
-    .subscribe(
-      data => this.ListLobby = data
-    );
-    if (typeof this.ListLobby !== 'undefined') {
-      this.isSearching = false;
-      this.Lobby = this.ListLobby[0];
-    }
+  // open Modal or redirected to page
+  openSearchLobby() {
     this.toggleSearchModal();
   }
-
-  joinLobbyModal() {
+  openJoinLobby() {
     this.toggleJoinModal();
   }
-
-  showLobby() {
+  openShowLobby() {
     window.open('/lobby', '_self');
   }
-
-  joinLobbyJoinModal(uuid: String) {
-    this.isJoinModalActive = false;
-    this.joinLobby(uuid);
+  openCreateLobby() {
+    this.toggleCreateModal();
   }
 
-  joinLobbySearchModal(uuid: String) {
-    this.isSearchModalActive = false;
-    this.joinLobby(uuid);
-  }
-
-  joinLobby(uuid: String) {
-    this.lobbyService.join(this.playerName, this.uuid).subscribe(
-      data => this.isJoinSuccess = data.StartGame
+  // modal specific methods
+  searchLobby() {
+    this.lobbyService.getListLobbys().subscribe(
+      data => this.listLobby = data
     );
-    this.Message = this.isJoinSuccess ? 'Connection was a Success' : 'Connection has Failed';
-    this.isMessageActive = true;
+    this.lobby = this.getLobbyWithSpace(this.listLobby);
+    this.joinLobby(this.lobbyData.playerName, this.lobby.Name);
   }
 
-  initLobby() {
-    this.isJoinSuccess = true;
-    this.delay(30000);
-    window.open('/game', '_self');
+  createLobby() {
+    this.lobbyService.initLobby(this.lobbyData.playerName, this.lobbyData.color).subscribe(
+      data => this.lobby = data
+    );
+    this.joinWorked(this.lobby);
   }
 
+  joinLobby(playerName: String, uuid: String) {
+    this.lobbyService.join(playerName, uuid).subscribe(
+      data => this.lobby = data
+    );
+    this.joinWorked(this.lobby);
+  }
+
+  // search method
+  getLobbyWithSpace(ListLobby: ILobby[]): ILobby {
+    let Lobby: ILobby;
+    if (this.isNotEmpty(ListLobby)) {
+      ListLobby = ListLobby
+      .filter(element => this.isNotEmpty(element.PlayerTwo));
+      if (this.isNotEmpty(ListLobby)) {
+        Lobby = ListLobby.pop();
+      } else {
+        Lobby = null;
+      }
+    } else {
+      Lobby = null;
+    }
+    return Lobby;
+  }
+
+  // message method
+  joinWorked(Lobby: ILobby) {
+      this.messageData = this.setMessage(Lobby);
+      this.modal.isMessageActive = true;
+      this.delay(3000);
+      window.open('/game' + Lobby.Name, '_self');
+  }
+
+  setMessage(Lobby: ILobby): MessageData {
+    const success = 'Connection was a Success';
+    const failed = 'Connection has Failed';
+    let message;
+    let isSuccess;
+    if (this.isNotEmpty(Lobby)) {
+      message = failed;
+      isSuccess = false;
+    } else {
+      message = Lobby.StartGame ? success : failed;
+      isSuccess = Lobby.StartGame;
+    }
+    return new MessageData(message, isSuccess);
+  }
+
+  // await function from stackoverflow
   async delay(ms: number) {
-    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log("fired"));
-}
+    await new Promise(resolve => setTimeout(() => resolve(), ms)).then(() => console.log('fired'));
+  }
 
-toggleJoinModal() {
-  this.isJoinModalActive = !this.isJoinModalActive;
-}
+  isNotEmpty(Object: Object): Boolean {
+    for (const key in Object) {
+      if (Object.hasOwnProperty(key)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
+  // toggle Modal
+  toggleCreateModal() {
+    this.modal.isCreateActive = !this.modal.isCreateActive;
+  }
+  toggleJoinModal() {
+    this.modal.isJoinActive = !this.modal.isJoinActive;
+  }
   toggleSearchModal() {
-    this.isSearchModalActive = !this.isSearchModalActive;
+    this.modal.isSearchActive = !this.modal.isSearchActive;
+  }
+  toggleMessageModal() {
+    this.modal.isMessageActive = !this.modal.isMessageActive;
   }
 }

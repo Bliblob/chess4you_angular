@@ -25,4 +25,8 @@ export class LobbyService {
     return this.http.get<ILobby>(this.url + '/getLobby/' + uuid);
   }
 
+  initLobby(playerName: String, color: Boolean): Observable<ILobby> {
+    return this.http.get<ILobby>(this.url + '/initLobby/' + playerName + '/' + color);
+  }
+
 }
