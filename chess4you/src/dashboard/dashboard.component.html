@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="columns" style="padding: 15vh;">
+    <div class="column">
+      <a (click)="searchLobbyModal()" class="button is-large is-fullwidth is-info is-outlined" style="height: 50vh;">Search Lobby</a>
+    </div>
+    <div class="column">
+      <a (click)="joinLobbyModal()" class="button is-large is-fullwidth is-info is-outlined" style="height: 50vh;">Join Lobby</a>
+    </div>
+    <div class="column">
+      <a (click)="showLobby()" class="button is-large is-fullwidth is-info is-outlined" style="height: 50vh">Show Lobbys</a>
+    </div>
+    <div class="column">
+      <a (click)="initLobby()" class="button is-large is-fullwidth is-info is-outlined" style="height: 50vh">Create Lobby</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" [ngClass]="{ 'is-active' : isSearchModalActive }">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Search for Lobby</p>
+        <button (click)="toggleSearchModal()" class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+          <div class="field">
+              <label class="label">Playername</label>
+              <div class="controll">
+                  <input [(ngModel)]="playerName" class="input" type="text" placeholder="Blublubmaster2000">
+              </div>
+              <p class="help">Enter your existing Playername or a new one.</p>
+            </div>
+      </section>
+      <footer class="modal-card-foot">
+          <button [disabled]="!isSearching || !playerName" (click)="joinLobby(Lobby.Name)" [ngClass]="{ 'is-loading' : !isSearching }" class="button is-info is-large is-fullwidth">Join Game</button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal" [ngClass]="{ 'is-active' : isJoinModalActive }">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Join a Lobby</p>
+        <button (click)="toggleJoinModal()" class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label">Uuid</label>
+          <div class="controll">
+              <input [(ngModel)]="uuid" class="input" type="text" placeholder="Uuid of the Game">
+          </div>
+          <p class="help">Copy here the received uuid to join a Game.</p>
+        </div>
+        <div class="field">
+            <label class="label">Playername</label>
+            <div class="controll">
+                <input [(ngModel)]="playerName" class="input" type="text" placeholder="Blublubmaster2000">
+            </div>
+            <p class="help">Enter your existing Playername or a new one.</p>
+          </div>
+        </section>
+      <footer class="modal-card-foot">
+          <button [disabled]="!uuid || !playerName" (click)="joinLobbyJoinModal(uuid)" class="button is-info is-large is-fullwidth">Join Game</button>
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal" [ngClass]="{ 'is-active' : isMessageActive }">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Message</p>
+          <button (click)="toggleJoinModal()" class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <i [className]="isJoinSuccess ? 'fas fa-exclamation-circle' : 'far fa-check-circle' ">{{Message}}</i>
+        </section>  
+    </div>
+  </div>

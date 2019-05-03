@@ -3,6 +3,7 @@ import { Line } from '../data-structure/Line';
 import { Field } from '../data-structure/Line';
 import { LobbyService } from 'src/lobby.service';
 import { ILobby } from 'src/data-structure/Lobby';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chess-game',
@@ -15,13 +16,21 @@ export class ChessGameComponent implements OnInit {
   Lobby: ILobby;
   ChessBoard: Line[] = new Array();
 
-  constructor(private lobbyService: LobbyService) { }
+  constructor(
+    private lobbyService: LobbyService,
+    private route: ActivatedRoute
+    ) { }
   ngOnInit() {
-    this.createChessBoard("b533adca-12eb-4ac0-91e2-cea1059a90af");
+    this.getGame();
   }
 
-  createChessBoard(uuid: String) {
-    this.getGameData(uuid);
+  getGame() {
+    this.uuid = this.route.snapshot.paramMap.get('uuid');
+    this.getGameData(this.uuid);
+    this.createChessBoard();
+  }
+
+  createChessBoard() {
     let Switch: Boolean = true;
     let Id: Number;
     const Char: String[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
@@ -30,7 +39,7 @@ export class ChessGameComponent implements OnInit {
       let IdLine: String[] = new Array();
       for (let line = 0; line < 8; line++) {
         ColorLine.push(Switch);
-        Id = 9 - row;
+        Id = 8 - row;
         IdLine.push(Char[line] + Id.toString());
         Switch = Switch ? false : true;
       }

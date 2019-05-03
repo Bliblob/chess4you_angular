@@ -15,30 +15,8 @@
             <p class="subtitle">Players:</p>
             <p>1. {{Lobby.PlayerOne.Name}}</p>
             <p>2. {{Lobby.PlayerTwo?.Name}}</p>
-            <a id="join" (click)="toggleModal(Lobby.Name)" class="button is-info is-inverted is-outlined">Join Lobby</a>
+            <a [id]="Lobby.Name" (click)="joinLobby(Lobby.Name)" [className]="isLoading ? 'button is-info is-inverted is-outlined is-loading has-background-white' : 'button is-info is-inverted is-outlined' ">Join Lobby</a>
         </article>
       </div>
     </div>
   </div>
-
-  <div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">Lobby: {{ModalName}}</p>
-          <button class="delete" aria-label="close" (click)="toggleModal()"></button>
-        </header>
-        <section class="modal-card-body">
-            <div class="field">
-                <label class="label">Name</label>
-                <div class="control">
-                  <input [(ngModel)]="playerName" class="input" type="text" placeholder="Blublubmaster2000" (keyup)="buttonJoinStatus = false">
-                </div>
-            </div>
-        </section>
-        <footer class="modal-card-foot">
-          <button class="button is-success" (click)="joinLobby(playerName.toString(), ModalName)" [disabled]="buttonJoinStatus">Save changes</button>
-          <button class="button" (click)="toggleModal()">Cancel</button>
-        </footer>
-      </div>
-    </div>

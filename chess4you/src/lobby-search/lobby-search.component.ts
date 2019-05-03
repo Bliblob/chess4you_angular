@@ -11,6 +11,7 @@ export class LobbySearchComponent implements OnInit {
 
   ListLobby: ILobby[] = new Array();
   Lobby: ILobby;
+  isLoading = false;
   isModalActive = false;
   buttonJoinStatus = true;
   ModalName: String;
@@ -27,16 +28,11 @@ export class LobbySearchComponent implements OnInit {
     );
   }
 
-  joinLobby(playerName: String, uuid: string) {
-    // document.getElementById('join').className = 'button is-info is-inverted is-outlined is-loading has-background-white';
-    console.log(playerName + uuid);
-    this.lobbyService.join(playerName, uuid)
-    .subscribe(
-      data => this.Lobby = data
-    );
-    if (this.Lobby.PlayerTwo === null) {
-      
-    }
+  joinLobby(uuid: String) {
+    this.isLoading = true;
+    setTimeout(() => {
+      window.open('/dashboard/' + uuid, '_self');
+    }, 3000);
   }
   toggleModal(uuid: String) {
     this.ModalName = uuid;
