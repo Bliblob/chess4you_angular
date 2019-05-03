@@ -1,17 +1,44 @@
 <div class="container is-widescreen">
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      <li><a href="#">Chess4You</a></li>
+      <li class="is-active"><a href="#" aria-current="page">Game</a></li>
+    </ul>
+  </nav>
+</div>
+<div class="container is-widescreen">
     <div class="notification has-background-white">
       <h2 class="title is-2">Lobby's</h2>
       <div class="tile is-parent is-vertical">
-        <article class="tile is-child notification is-warning has-background-info has-text-white">
-          <p class="title">Lobby: var lobbyNumber</p>
-          <p class="subtitle">Players: var playerCount/2</p>
-          <a id="join" (click)="joinLobby()" class="button is-info is-inverted is-outlined">Join Lobby</a>
+        <article *ngFor="let Lobby of ListLobby"  class="tile is-child notification is-warning has-background-info has-text-white">
+            <p class="title">Lobby: {{Lobby.Name}}</p>
+            <p class="subtitle">Players:</p>
+            <p>1. {{Lobby.PlayerOne.Name}}</p>
+            <p>2. {{Lobby.PlayerTwo?.Name}}</p>
+            <a id="join" (click)="toggleModal(Lobby.Name)" class="button is-info is-inverted is-outlined">Join Lobby</a>
         </article>
-        <article class="tile is-child notification is-warning has-background-info has-text-white">
-            <p class="title">Lobby: var lobbyNumber</p>
-            <p class="subtitle">Players: var playerCount/2</p>
-            <a id="join" (click)="joinLobby()" class="button is-info is-inverted is-outlined">Join Lobby</a>
-          </article>
       </div>
     </div>
   </div>
+
+  <div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Lobby: {{ModalName}}</p>
+          <button class="delete" aria-label="close" (click)="toggleModal()"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                  <input [(ngModel)]="playerName" class="input" type="text" placeholder="Blublubmaster2000" (keyup)="buttonJoinStatus = false">
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" (click)="joinLobby(playerName.toString(), ModalName)" [disabled]="buttonJoinStatus">Save changes</button>
+          <button class="button" (click)="toggleModal()">Cancel</button>
+        </footer>
+      </div>
+    </div>

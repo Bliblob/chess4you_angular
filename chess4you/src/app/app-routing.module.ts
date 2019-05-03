@@ -3,10 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LobbySearchComponent } from '../lobby-search/lobby-search.component';
 import { ChessGameComponent } from '../chess-game/chess-game.component';
+import { PlayerSearchComponent } from '../player-search/player-search.component';
 
-const routes: Routes = [ 
+const routes: Routes = [
+  { path: '', redirectTo: '/playersearch', pathMatch: 'full'},
   { path: 'lobby', component: LobbySearchComponent },
-  { path: 'game', component: ChessGameComponent }
+  { path: 'game', component: ChessGameComponent },
+  { path: 'playersearch', component: PlayerSearchComponent}
 ];
 
 @NgModule({
