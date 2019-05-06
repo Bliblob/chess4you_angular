@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LobbyService } from '../lobby.service';
 import { ILobby } from '../data-structure/Lobby';
+import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-lobby-search',
@@ -28,12 +29,24 @@ export class LobbySearchComponent implements OnInit {
     );
   }
 
-  joinLobby(uuid: String) {
-    this.isLoading = true;
-    setTimeout(() => {
-      window.open('/dashboard/' + uuid, '_self');
-    }, 3000);
+  joinLobby(uuid: String, e) {
+
+    //to make this function work remove the const's and document.getElementById
+
+    //Get id from the element
+    const elementId = e.id;
+
+    //use id to change the class name
+    document.getElementById(elementId).className = "button is-info is-inverted is-outlined is-loading has-background-white";
+
+    //open the lobby
+    window.open('/dashboard/' + uuid, '_self');
+
+    //setTimeout(() => {
+
+    //}, 3000);
   }
+
   toggleModal(uuid: String) {
     this.ModalName = uuid;
     this.isModalActive = !this.isModalActive;
