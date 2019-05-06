@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Line } from '../data-structure/Line';
-import { Field } from '../data-structure/Line';
 import { LobbyService } from 'src/lobby.service';
 import { ILobby } from 'src/data-structure/Lobby';
 import { ActivatedRoute } from '@angular/router';
+import { Pieces } from 'src/data-structure/chess/pieces/Pieces';
+import { Field } from 'src/data-structure/chess/field/Field';
 
 @Component({
   selector: 'app-chess-game',
@@ -15,6 +16,10 @@ export class ChessGameComponent implements OnInit {
   uuid: String;
   Lobby: ILobby;
   ChessBoard: Line[] = new Array();
+  BlackPieces: Pieces[] = new Array();
+  WhitePieces: Pieces[] = new Array();
+
+
 
   constructor(
     private lobbyService: LobbyService,
@@ -55,5 +60,17 @@ export class ChessGameComponent implements OnInit {
     this.lobbyService.getLobby(uuid).subscribe(
       data => this.Lobby = data
     );
+  }
+
+  createPieces(): void {
+    const firstPart = 'Chess_';
+    const white = 'lt45.svg';
+    const black = 'dt45.svg';
+    const sequenzewhite
+     = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'];
+    for (let row = 0; row < 16; ++row) {
+      this.WhitePieces.push(new Pieces(firstPart + sequenzewhite[row] + white));
+      this.BlackPieces.push(new Pieces(firstPart + sequenzewhite[row] + black));
+    }
   }
 }
