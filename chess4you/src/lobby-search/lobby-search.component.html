@@ -6,13 +6,13 @@
 <div class="container has-text-white">
     <div class="notification has-background-info">
       <div class="tile is-parent is-vertical">
-        <!--<article *ngFor="let Lobby of ListLobby"  class="tile is-child notification is-warning has-background-info has-text-white">-->
+        <article *ngFor="let Lobby of ListLobby"  class="tile is-child notification is-warning has-background-info has-text-white">
             <p class="title">Lobby: {{Lobby.Name}}</p>
             <p class="subtitle">Players:</p>
             <p>1. {{Lobby.PlayerOne.Name}}</p>
             <p>2. {{Lobby.PlayerTwo?.Name}}</p>
-            <a [id]="abc" (click)="joinLobby($event)" class="button is-info is-inverted is-outlined">Join Lobby</a>
-        <!--</article>-->
+            <a [id]="Lobby.Name" (click)="joinLobby($event)" class="button is-info is-inverted is-outlined">Join Lobby</a>
+        </article>
       </div>
     </div>
   </div>

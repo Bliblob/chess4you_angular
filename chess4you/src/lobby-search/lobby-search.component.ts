@@ -29,22 +29,16 @@ export class LobbySearchComponent implements OnInit {
     );
   }
 
-  joinLobby(uuid: String, e) {
+  joinLobby(event): void {
+    const id = event.target.id;
+    document.querySelector('[id=' + CSS.escape(id) + ']').className = 'button is-info is-loading';
+    setTimeout(() => {
+      this.openDashboard(id);
+    }, 3000);
+  }
 
-    //to make this function work remove the const's and document.getElementById
-
-    //Get id from the element
-    const elementId = e.id;
-
-    //use id to change the class name
-    document.getElementById(elementId).className = "button is-info is-inverted is-outlined is-loading has-background-white";
-
-    //open the lobby
-    window.open('/dashboard/' + uuid, '_self');
-
-    //setTimeout(() => {
-
-    //}, 3000);
+  openDashboard(uuid: String): void {
+    window.open('/dashboard/' + uuid + '_self');
   }
 
   toggleModal(uuid: String) {
