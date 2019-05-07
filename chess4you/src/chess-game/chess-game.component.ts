@@ -5,6 +5,7 @@ import { ILobby } from 'src/data-structure/Lobby';
 import { ActivatedRoute } from '@angular/router';
 import { Pieces } from 'src/data-structure/chess/pieces/Pieces';
 import { Field } from 'src/data-structure/chess/field/Field';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-chess-game',
@@ -16,8 +17,11 @@ export class ChessGameComponent implements OnInit {
   uuid: String;
   Lobby: ILobby;
   ChessBoard: Line[] = new Array();
-  BlackPieces: Pieces[] = new Array();
-  WhitePieces: Pieces[] = new Array();
+  BlackPiecesOne: Pieces[] = new Array();
+  BlackPiecesTwo: Pieces[] = new Array();
+  WhitePiecesOne: Pieces[] = new Array();
+  WhitePiecesTwo: Pieces[] = new Array();
+  EmptyPieces: Pieces[] = new Array();
 
 
 
@@ -38,7 +42,11 @@ export class ChessGameComponent implements OnInit {
   createChessBoard() {
     let Switch: Boolean = true;
     let Id: Number;
+    let ListPiece: Pieces[] = new Array();
     const Char: String[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+
+    this.createPieces();
+
     for (let row = 0; row < 8; row++) {
       let ColorLine: Boolean[] = new Array();
       let IdLine: String[] = new Array();
@@ -48,7 +56,24 @@ export class ChessGameComponent implements OnInit {
         IdLine.push(Char[line] + Id.toString());
         Switch = Switch ? false : true;
       }
-      this.ChessBoard.push(new Line(IdLine, ColorLine));
+      switch (row) {
+        case 0:
+          ListPiece = this.WhitePiecesOne;
+          break;
+        case 1:
+          ListPiece = this.WhitePiecesTwo;
+          break;
+        case 6:
+          ListPiece = this.BlackPiecesOne;
+          break;
+        case 7:
+          ListPiece = this.BlackPiecesTwo;
+          break;
+        default:
+          ListPiece = new Array();
+          break;
+      }
+      this.ChessBoard.push(new Line(IdLine, ColorLine, ListPiece));
       Switch = Switch ? false : true;
       ColorLine = new Array();
       IdLine = new Array();
@@ -66,11 +91,24 @@ export class ChessGameComponent implements OnInit {
     const firstPart = 'Chess_';
     const white = 'lt45.svg';
     const black = 'dt45.svg';
-    const sequenzewhite
-     = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'];
-    for (let row = 0; row < 16; ++row) {
-      this.WhitePieces.push(new Pieces(firstPart + sequenzewhite[row] + white));
-      this.BlackPieces.push(new Pieces(firstPart + sequenzewhite[row] + black));
+    const sequenceWhite = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'];
+    const sequenceBlack = ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'r', 'n', 'b', 'k', 'q', 'b', 'n', 'r'];
+
+    for (let row = 0; row < 8; ++row) {
+      this.WhitePiecesOne.push(new Pieces(firstPart + sequenceWhite[row] + white));
+      this.WhitePiecesTwo.push(new Pieces(firstPart + sequenceWhite[16 - row] + white));
+      this.BlackPiecesOne.push(new Pieces(firstPart + sequenceBlack[row] + black));
+      this.BlackPiecesTwo.push(new Pieces(firstPart + sequenceBlack[16 - row] + black));
+      this.EmptyPieces.push(new Pieces(''));
+      this.EmptyPieces.push(new Pieces(''));
     }
+  }
+
+  getImg(pieces: Pieces): String {
+    return !pieces ? '' : '../assets/chess_board_pieces/' + pieces.name;
+  }
+
+  moveFigure(Id: String): void {
+    alert("hallo");
   }
 }
