@@ -4,8 +4,6 @@ import { LobbyService } from 'src/lobby.service';
 import { ILobby } from 'src/data-structure/Lobby';
 import { ActivatedRoute } from '@angular/router';
 import { Pieces } from 'src/data-structure/chess/pieces/Pieces';
-import { Field } from 'src/data-structure/chess/field/Field';
-import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-chess-game',

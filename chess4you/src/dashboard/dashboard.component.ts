@@ -61,16 +61,19 @@ export class DashboardComponent implements OnInit {
 
   createLobby() {
     this.lobbyService.initLobby(this.lobbyData.playerName, this.lobbyData.color).subscribe(
-      data => this.lobby = data
+      data => {
+        this.lobby = data;
+        console.log(data);
+      }
     );
-    this.joinWorked(this.lobby);
+    this.joinWorked(this.lobby, this.modal.isCreateActive);
   }
 
   joinLobby(playerName: String, uuid: String) {
     this.lobbyService.join(playerName, uuid).subscribe(
       data => this.lobby = data
     );
-    this.joinWorked(this.lobby);
+    this.joinWorked(this.lobby, this.modal.isJoinActive);
   }
 
   // search method
@@ -91,24 +94,28 @@ export class DashboardComponent implements OnInit {
   }
 
   // message method
-  joinWorked(Lobby: ILobby) {
-      this.messageData = this.setMessage(Lobby);
+  joinWorked(Lobby: ILobby, modal: Boolean) {
+      const isJoined = Lobby === null ? false : true;
+      this.messageData = this.setMessage(isJoined);
       this.modal.isMessageActive = true;
+      modal = false;
       this.delay(3000);
-      window.open('/game' + Lobby.Name, '_self');
+      if (isJoined) {
+        window.open('/game' + Lobby.Name, '_self');
+      }
   }
 
-  setMessage(Lobby: ILobby): MessageData {
+  setMessage(isActive: Boolean): MessageData {
     const success = 'Connection was a Success';
     const failed = 'Connection has Failed';
     let message;
     let isSuccess;
-    if (this.isNotEmpty(Lobby)) {
+    if (this.isNotEmpty(isActive)) {
       message = failed;
       isSuccess = false;
     } else {
-      message = Lobby.StartGame ? success : failed;
-      isSuccess = Lobby.StartGame;
+      message = isActive ? success : failed;
+      isSuccess = isActive;
     }
     return new MessageData(message, isSuccess);
   }
