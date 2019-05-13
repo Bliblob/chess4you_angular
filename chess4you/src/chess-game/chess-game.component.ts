@@ -21,8 +21,6 @@ export class ChessGameComponent implements OnInit {
   WhitePiecesTwo: Pieces[] = new Array();
   EmptyPieces: Pieces[] = new Array();
 
-
-
   constructor(
     private lobbyService: LobbyService,
     private route: ActivatedRoute
@@ -107,6 +105,8 @@ export class ChessGameComponent implements OnInit {
   }
 
   moveFigure(Id: String): void {
+
+
     alert("hallo");
   }
 }
