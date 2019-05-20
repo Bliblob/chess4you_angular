@@ -19,14 +19,8 @@
 <div class=level>
   <div class="level-item">
     <div class="box"> 
-      <div class="columns is-gapless is-centered" style="margin: 0px;" *ngFor="let line of ChessBoard">
-        <div class="column" *ngFor="let field of line.FieldLine" [id]="field.Id" style="height: 75px; width: 75px;" [className]="field.Color ? 'has-background-dark' : 'has-background-white'">
-          <a (click)="moveFigure(field.Id)">
-            <figure class="image is-64x64 has-image-centered">
-              <img id="chessFigure" src="{{getImg(field.pieces)}}"/>
-            </figure>
-          </a>
-        </div>
+      <div *ngFor="let line of chessBoard." class="columns is-gapless is-centered" style="margin: 0px;">
+        <p>Hallo</p>
       </div>
     </div>
   </div>
