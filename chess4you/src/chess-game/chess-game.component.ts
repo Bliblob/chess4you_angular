@@ -6,13 +6,6 @@ import { Piece } from 'src/data-structure/chess/pieces/Piece';
 import { Field } from 'src/data-structure/chess/field/Field';
 import { ChessGameServiceService } from 'src/services/chess-game-service.service';
 
-
-const firstPart = 'Chess_';
-const white = 'lt45.svg';
-const black = 'dt45.svg';
-const sequenceWhite = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'];
-const sequenceBlack = ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'r', 'n', 'b', 'k', 'q', 'b', 'n', 'r'];
-
 @Component({
   selector: 'app-chess-game',
   templateUrl: './chess-game.component.html',
@@ -27,8 +20,10 @@ export class ChessGameComponent implements OnInit {
     private gameService: ChessGameServiceService,
     private route: ActivatedRoute
     ) { }
+    
   ngOnInit() {
     this.getGame();
+    console.log(this.chessBoard);
   }
 
   getGame() {
@@ -36,7 +31,6 @@ export class ChessGameComponent implements OnInit {
     this.getGameData(this.uuid);
 
   }
-
 
   async getGameData(uuid: String) {
     await this.gameService.getPieces(uuid)
@@ -48,12 +42,13 @@ export class ChessGameComponent implements OnInit {
       console.log(this.chessBoard);
   }
 
-
   getImg(pieces: Piece): String {
-    return !pieces ? '' : '../assets/chess_board_pieces/' + pieces.name;
+    return !pieces ? '' : './assets/chess_board_pieces/' + pieces.name + '.svg'
   }
 
   moveFigure(Id: String): void {
-      
+    let initClick;
+    let goToClick;
   }
+  
 }
