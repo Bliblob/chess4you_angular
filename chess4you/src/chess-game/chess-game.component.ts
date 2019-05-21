@@ -3,7 +3,6 @@ import { LobbyService } from 'src/lobby.service';
 import { ILobby } from 'src/data-structure/Lobby';
 import { ActivatedRoute } from '@angular/router';
 import { Piece } from 'src/data-structure/chess/pieces/Piece';
-import { Field } from 'src/data-structure/chess/field/Field';
 import { ChessGameServiceService } from 'src/services/chess-game-service.service';
 
 @Component({
@@ -14,13 +13,15 @@ import { ChessGameServiceService } from 'src/services/chess-game-service.service
 export class ChessGameComponent implements OnInit {
 
   uuid: String;
-  chessBoard: Object;
+  chessBoard: IChessBoard;
+  lobby: ILobby;
 
   constructor(
+    private lobbyService: LobbyService,
     private gameService: ChessGameServiceService,
     private route: ActivatedRoute
     ) { }
-    
+
   ngOnInit() {
     this.getGame();
     console.log(this.chessBoard);
@@ -29,17 +30,25 @@ export class ChessGameComponent implements OnInit {
   getGame() {
     this.uuid = this.route.snapshot.paramMap.get('uuid');
     this.getGameData(this.uuid);
-
+    this.getLobbyData(this.uuid);
   }
-
-  async getGameData(uuid: String) {
-    await this.gameService.getPieces(uuid)
+  async getLobbyData(uuid: String): Promise<void> {
+    await this.lobbyService.getLobby(uuid)
     .toPromise()
     .then(
-      data=>{
-        this.chessBoard = <Object>data;
+      data => {
+        this.lobby = data;
+      }
+    );
+  }
+
+  async getGameData(uuid: String): Promise<void> {
+    await this.gameService.getChessBoard(uuid)
+    .toPromise()
+    .then(
+      data => {
+        this.chessBoard = <IChessBoard>data;
       });
-      console.log(this.chessBoard);
   }
 
   getImg(pieces: Piece): String {
@@ -50,5 +59,7 @@ export class ChessGameComponent implements OnInit {
     let initClick;
     let goToClick;
   }
-  
+}
+export class IChessBoard {
+  ChessBoard: [];
 }
