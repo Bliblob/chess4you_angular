@@ -19,8 +19,8 @@
   <div class=level>
     <div class="level-item">
       <div class="box"> 
-        <div *ngFor="let line of chessBoard">
-          <div *ngFor="let field of line" style="height: 75px; width: 75px;" class="columns is-gapless is-centered" style="margin: 0px;">
+        <div *ngFor="let line of chessBoard.ChessBoard" class="columns is-gapless is-centered">
+          <div *ngFor="let field of line" style="height: 75px; width: 75px; margin: 0px;" class="columns is-gapless is-centered">
           </div>
         </div>
       </div>

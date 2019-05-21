@@ -12,7 +12,7 @@ export class ChessGameServiceService {
 
   private url = 'http://localhost:8080';
 
-  getPieces(uuid: String): Observable<Field[][]>{
-    return this.http.get<Field[][]>(this.url + '/hasBoardChanged/' + uuid);
+  getPieces(uuid: String): Observable<Object>{
+    return this.http.get<Object>(this.url + '/hasBoardChanged/' + uuid);
   }
 }

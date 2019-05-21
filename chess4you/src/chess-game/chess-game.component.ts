@@ -14,7 +14,7 @@ import { ChessGameServiceService } from 'src/services/chess-game-service.service
 export class ChessGameComponent implements OnInit {
 
   uuid: String;
-  chessBoard: Field[][]=[];
+  chessBoard: Object;
 
   constructor(
     private gameService: ChessGameServiceService,
@@ -37,7 +37,7 @@ export class ChessGameComponent implements OnInit {
     .toPromise()
     .then(
       data=>{
-        this.chessBoard = <Field[][]>data;
+        this.chessBoard = <Object>data;
       });
       console.log(this.chessBoard);
   }
