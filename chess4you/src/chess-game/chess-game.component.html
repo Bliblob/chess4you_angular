@@ -18,9 +18,11 @@
   </div>
   <div class=level>
     <div class="level-item">
-      <div class="box"> 
-        <div *ngFor="let line of chessBoard.ChessBoard" class="columns is-gapless is-centered">
-          <div *ngFor="let field of line" style="height: 75px; width: 75px; margin: 0px;" class="columns is-gapless is-centered">
+      <div class="box">
+        <div *ngFor="let line of chessBoard.ChessBoard; let y = index; let firstEven = even; let firstOdd = odd" style="margin: 0px;" class="columns is-gapless is-centered">
+          <div (click)="moveFigure($event, field)" *ngFor="let field of line; let x = index; let secondEven = even; let secondOdd = odd" style="height: 75px; width: 75px; margin: 0px;" 
+          [ngClass]="((firstEven && secondEven)||(firstOdd && secondOdd))? 'has-background-dark' : 'has-background-white'">
+            <img id="{{y}},{{x}}" src="{{getImg(field)}}" class="has-image-centered" />
           </div>
         </div>
       </div>
