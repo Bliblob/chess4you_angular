@@ -1,31 +1,39 @@
-<div id="container" class="container">
-  <br>
-  <div class="level">
-    <div class="level-item">
-      <h2 align="center" class="title is-3">Lobby: {{Lobby?.Name}}</h2>
+<div id="container" class="container"><br>
+  <div class="has-background-white-ter">
+    <div class="level">
+      <div class="level-item">
+        <h2 align="center" class="title is-3">Lobby: {{Lobby?.Name}}</h2>
+      </div>
     </div>
-  </div>
-  <div class="level">
-    <div class="level-left">
-      <h4 align="left" class="title is-4">Player: {{Lobby?.PlayerOne?.Name.toUpperCase()}}</h4>
+    <div class="level">
+      <div class="level-left">
+        <h4 align="left" class="title is-4">Player: {{Lobby?.PlayerOne?.Name.toUpperCase()}}</h4>
+      </div>
+      <div class="level-item">
+        <h4 align="center" class="title is-4">Vs.</h4>
+      </div>
+      <div class="level-right">
+        <h4 align="right" class="title is-4">Player: {{Lobby?.PlayerTwo?.Name.toUpperCase()}}</h4>  
+      </div>
     </div>
-    <div class="level-item">
-      <h4 align="center" class="title is-4">Vs.</h4>
-    </div>
-    <div class="level-right">
-      <h4 align="right" class="title is-4">Player: {{Lobby?.PlayerTwo?.Name.toUpperCase()}}</h4>  
-    </div>
-  </div>
-  <div class=level>
-    <div class="level-item">
-      <div class="box">
-        <div *ngFor="let line of chessBoard.ChessBoard; let y = index; let firstEven = even; let firstOdd = odd" style="margin: 0px;" class="columns is-gapless is-centered">
-          <div (click)="moveFigure($event, field)" *ngFor="let field of line; let x = index; let secondEven = even; let secondOdd = odd" style="height: 75px; width: 75px; margin: 0px;" 
-          [ngClass]="((firstEven && secondEven)||(firstOdd && secondOdd))? 'has-background-dark' : 'has-background-white'">
-            <img id="{{y}},{{x}}" src="{{getImg(field)}}" class="has-image-centered" />
+    <div class="level">
+        <div class="level-item">
+          <h5 align="center" class="title is-5">Time left:</h5>
+        </div>
+      </div>
+    <div class=level>
+      <div class="level-item">
+        <div class="box">
+          <div *ngFor="let line of chessBoard.ChessBoard; let y = index; let firstEven = even; let firstOdd = odd" style="margin: 0px;" class="columns is-gapless is-centered">
+            <div (click)="moveFigure($event, field)" *ngFor="let field of line; let x = index; let secondEven = even; let secondOdd = odd" style="height: 75px; width: 75px; margin: 0px;" 
+              [ngClass]="((firstEven && secondEven)||(firstOdd && secondOdd))? 'has-background-dark' : 'has-background-white'">
+              <img id="{{y}},{{x}}" src="{{getImg(field)}}" class="has-image-centered" />
+            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div style="height: 20px;">
     </div>
   </div>
 </div>
