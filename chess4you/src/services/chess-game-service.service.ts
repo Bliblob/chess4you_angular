@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IChessBoard } from 'src/chess-game/chess-game.component';
+import { Field } from 'src/data-structure/chess/field/Field';
+import { ChessBoard } from 'src/chess-game/chess-game.component';
+import {HttpParams} from  "@angular/common/http";
+
+const url = 'http://localhost:8080';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ChessGameServiceService {
 
   constructor(private http: HttpClient) { }
 
-  private url = 'http://localhost:8080';
-
-  getChessBoard(uuid: String): Observable<IChessBoard> {
-    return this.http.get<IChessBoard>(this.url + '/hasBoardChanged/' + uuid);
+  getPieces(lobbyUUID: string, playerUUID: string): Observable<ChessBoard>{
+    let params = new HttpParams().set('lobbyUuid', lobbyUUID).set('playerUuid', playerUUID);
+    return this.http.get<ChessBoard>(url + '/getBoard', {params});
   }
 }

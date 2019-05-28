@@ -8,9 +8,9 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'dashboard/:lobbyUuid', component: DashboardComponent},
+  {path: 'dashboard/:lobbyUUID', component: DashboardComponent},
   { path: 'lobby', component: LobbySearchComponent },
-  { path: 'game/:uuid', component: ChessGameComponent }
+  { path: 'game/:lobbyUUID/:playerUUID', component: ChessGameComponent }
 ];
 
 @NgModule({
