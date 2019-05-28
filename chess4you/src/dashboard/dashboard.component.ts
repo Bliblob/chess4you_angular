@@ -30,8 +30,8 @@ export class DashboardComponent implements OnInit {
   }
 
   handleParam() {
-    if (this.route.snapshot.paramMap.get('uuid')) {
-      this.lobbyData.uuid = this.route.snapshot.paramMap.get('uuid');
+    if (this.route.snapshot.paramMap.get('lobbyUuid')) {
+      this.lobbyData.lobbyUuid = this.route.snapshot.paramMap.get('lobbyUuid');
       this.toggleJoinModal();
     }
   }
@@ -51,39 +51,57 @@ export class DashboardComponent implements OnInit {
   }
 
   // modal specific methods
-  searchLobby() {
-    this.lobbyService.getListLobbys().subscribe(
-      data => this.listLobby = data
-    );
-    this.lobby = this.getLobbyWithSpace(this.listLobby);
-    this.joinLobby(this.lobbyData.playerName, this.lobby.Name);
-  }
-
-  createLobby() {
-    this.lobbyService.initLobby(this.lobbyData.playerName, this.lobbyData.color).subscribe(
+  async searchLobby() {
+    await this.lobbyService.getListLobbys()
+    .toPromise()
+    .then(
       data => {
-        this.lobby = data;
-        console.log(data);
+        this.listLobby = data;
       }
     );
+    console.log(this.lobby)
+    this.lobby = this.getLobbyWithSpace(this.listLobby);
+    this.joinLobby(this.lobby.Name, this.lobbyData.playerName);
+  }
+
+  async createLobby() {
+    await this.lobbyService.initLobby(this.lobbyData.playerName.toString(), this.lobbyData.color)
+    .toPromise()
+    .then(
+      data => {
+        this.lobby = data;
+      }
+    );
+    console.log(this.lobby);
     this.joinWorked(this.lobby, this.modal.isCreateActive);
   }
 
-  joinLobby(playerName: String, uuid: String) {
-    this.lobbyService.join(playerName, uuid).subscribe(
-      data => this.lobby = data
+  async joinLobby(lobbyUuid: string, playerName: string) {
+    if (lobbyUuid !== 'undefined' && playerName !== 'undefined') {
+      await this.lobbyService.join(lobbyUuid, playerName)
+    .toPromise()
+    .then(
+      data => {
+        this.lobby = data;
+      }
     );
+    }
     this.joinWorked(this.lobby, this.modal.isJoinActive);
   }
 
   // search method
   getLobbyWithSpace(ListLobby: ILobby[]): ILobby {
     let Lobby: ILobby;
+// tslint:disable-next-line: prefer-const
+    let tmpListLobby: ILobby[] = [];
     if (this.isNotEmpty(ListLobby)) {
-      ListLobby = ListLobby
-      .filter(element => this.isNotEmpty(element.PlayerTwo));
-      if (this.isNotEmpty(ListLobby)) {
-        Lobby = ListLobby.pop();
+      ListLobby.forEach( element => {
+        if (element.PlayerTwo == null) {
+          tmpListLobby.push(element);
+        }
+      });
+      if (this.isNotEmpty(tmpListLobby)) {
+        Lobby = tmpListLobby.pop();
       } else {
         Lobby = null;
       }
@@ -101,7 +119,7 @@ export class DashboardComponent implements OnInit {
       modal = false;
       this.delay(3000);
       if (isJoined) {
-        window.open('/game' + Lobby.Name, '_self');
+        window.open('/game' + Lobby.Name + '/' + Lobby.PlayerOne, '_self');
       }
   }
 

@@ -11,7 +11,7 @@
             <p class="subtitle">Players:</p>
             <p>1. {{Lobby.PlayerOne.Name}}</p>
             <p>2. {{Lobby.PlayerTwo?.Name}}</p>
-            <a [id]="Lobby.Name" (click)="joinLobby($event)" class="button is-info is-inverted is-outlined">Join Lobby</a>
+            <button [disabled]="Lobby.PlayerTwo?.Name" [id]="Lobby.Name" (click)="joinLobby($event)" class="button is-info is-inverted is-outlined">{{Lobby.PlayerOne.Name && Lobby.PlayerTwo?.Name ? "Lobby is full" : "Join Lobby"}}</button>
         </article>
       </div>
     </div>

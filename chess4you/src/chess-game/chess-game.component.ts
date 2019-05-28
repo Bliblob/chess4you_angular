@@ -12,7 +12,7 @@ import { ChessGameServiceService } from 'src/services/chess-game-service.service
 })
 export class ChessGameComponent implements OnInit {
 
-  uuid: String;
+  uuid: string;
   chessBoard: IChessBoard;
   lobby: ILobby;
 
@@ -32,7 +32,7 @@ export class ChessGameComponent implements OnInit {
     this.getGameData(this.uuid);
     this.getLobbyData(this.uuid);
   }
-  async getLobbyData(uuid: String): Promise<void> {
+  async getLobbyData(uuid: string): Promise<void> {
     await this.lobbyService.getLobby(uuid)
     .toPromise()
     .then(

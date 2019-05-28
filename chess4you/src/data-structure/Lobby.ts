@@ -1,12 +1,12 @@
 export interface ILobby {
-    Name: String;
+    Name: string;
     StartGame: Boolean;
     PlayerOne: IPlayer;
     PlayerTwo: IPlayer;
 }
 
 export interface IPlayer {
-    Id: String;
-    Name: String;
+    Id: string;
+    Name: string;
     Color: Boolean;
 }

@@ -53,7 +53,7 @@
         <div class="field">
           <label class="label">Uuid</label>
           <div class="controll">
-              <input [(ngModel)]="lobbyData.uuid" class="input" type="text" placeholder="Uuid of the Game">
+              <input [(ngModel)]="lobbyData.lobbyUuid" class="input" type="text" placeholder="Uuid of the Game">
           </div>
           <p class="help">Copy here the received uuid to join a Game.</p>
         </div>
@@ -66,7 +66,7 @@
           </div>
         </section>
       <footer class="modal-card-foot">
-          <button [disabled]="!lobbyData.uuid || !lobbyData.playerName" (click)="joinLobby(lobbyData.playerName, lobbyData.uuid)" class="button is-info is-large is-fullwidth">Join Game</button>
+          <button [disabled]="!lobbyData.uuid && !lobbyData.playerName" (click)="joinLobby(lobbyData.lobbyUuid, lobbyData.playerName)" class="button is-info is-large is-fullwidth">Join Game</button>
       </footer>
     </div>
   </div>
@@ -103,11 +103,11 @@
             <label class="label">Color</label>
             <div class="control">
                 <label class="radio">
-                  <input [(ngModel)]="lobbyData.color" type="radio" name="foobar" [value]="true">
+                  <input [(ngModel)]="lobbyData.color" type="radio" name="foobar" value="White">
                   White
                 </label>
                 <label class="radio">
-                  <input [(ngModel)]="lobbyData.color" type="radio" name="foobar" [value]="false">
+                  <input [(ngModel)]="lobbyData.color" type="radio" name="foobar" value="Black">
                   Black
                 </label>
               </div>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LobbyService } from '../lobby.service';
 import { ILobby } from '../data-structure/Lobby';
-import { element } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-lobby-search',
@@ -38,7 +37,7 @@ export class LobbySearchComponent implements OnInit {
   }
 
   openDashboard(uuid: String): void {
-    window.open('/dashboard/' + uuid + '_self');
+    window.open('/dashboard/' + uuid, '_self');
   }
 
   toggleModal(uuid: String) {

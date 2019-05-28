@@ -8,7 +8,7 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'dashboard/:uuid', component: DashboardComponent},
+  {path: 'dashboard/:lobbyUuid', component: DashboardComponent},
   { path: 'lobby', component: LobbySearchComponent },
   { path: 'game/:uuid', component: ChessGameComponent }
 ];
