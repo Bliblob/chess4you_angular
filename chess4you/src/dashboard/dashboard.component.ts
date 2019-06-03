@@ -30,8 +30,8 @@ export class DashboardComponent implements OnInit {
   }
 
   handleParam() {
-    if (this.route.snapshot.paramMap.get('lobbyUuid')) {
-      this.lobbyData.lobbyUuid = this.route.snapshot.paramMap.get('lobbyUuid');
+    if (this.route.snapshot.paramMap.get('lobbyUUID')) {
+      this.lobbyData.lobbyUuid = this.route.snapshot.paramMap.get('lobbyUUID');
       this.toggleJoinModal();
     }
   }
@@ -59,7 +59,6 @@ export class DashboardComponent implements OnInit {
         this.listLobby = data;
       }
     );
-    console.log(this.lobby)
     this.lobby = this.getLobbyWithSpace(this.listLobby);
     this.joinLobby(this.lobby.Name, this.lobbyData.playerName);
   }
@@ -119,7 +118,10 @@ export class DashboardComponent implements OnInit {
       modal = false;
       this.delay(3000);
       if (isJoined) {
-        window.open('/game' + Lobby.Name + '/' + Lobby.PlayerOne, '_self');
+        if (!Lobby.PlayerTwo) {
+          window.open('/game/' + Lobby.Name + '/' + Lobby.PlayerOne.Id, '_self');
+        }
+        window.open('/game/' + Lobby.Name + '/' + Lobby.PlayerTwo.Id, '_self');
       }
   }
 

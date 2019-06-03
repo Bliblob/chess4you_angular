@@ -23,12 +23,13 @@ export class TurnService {
 
   constructor(private http: HttpClient) { }
 
-  getTurn(lobbyUUID: string, playerUUID: string, position: Position): Observable<Movement>{
-    let params = new HttpParams().set('lobbyUuid', lobbyUUID).set('playerUuid', playerUUID).set('position', JSON.stringify(position));
-    return this.http.get<Movement>(url + '/getBoard', {params});
+  getTurn(lobbyUUID: string, playerUUID: string, position: Position): Observable<Movement[]> {
+    const stringPosition = JSON.stringify(position);
+    const params = new HttpParams().set('lobbyUuid', lobbyUUID).set('playerUuid', playerUUID).set('position', stringPosition);
+    return this.http.get<Movement[]>(url + '/getTurn', {params});
   }
 
-  doTurn(lobbyUUID: string, playerUUID: string, position: string): Observable<ChessBoard>{
+  doTurn(lobbyUUID: string, playerUUID: string, position: string): Observable<ChessBoard> {
     let params = new HttpParams().set('lobbyUuid', lobbyUUID).set('playerUuid', playerUUID).set('position', position);
     return this.http.post<ChessBoard>(url + '/doTurn', {params}, options);
   }

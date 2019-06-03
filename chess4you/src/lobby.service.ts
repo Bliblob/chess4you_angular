@@ -18,7 +18,7 @@ export class LobbyService {
 
   getLobby(lobbyUuid: string): Observable<ILobby> {
     const params = new HttpParams()
-    .set('LobbyUuid', lobbyUuid);
+    .set('lobbyUuid', lobbyUuid);
     return this.http.get<ILobby>(url + '/getLobby', {params});
   }
 

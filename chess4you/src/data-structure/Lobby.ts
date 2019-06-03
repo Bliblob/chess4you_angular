@@ -8,5 +8,5 @@ export interface ILobby {
 export interface IPlayer {
     Id: string;
     Name: string;
-    Color: Boolean;
+    Color: String;
 }
