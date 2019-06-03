@@ -78,7 +78,11 @@ export class ChessGameComponent implements OnInit {
   }
 
   getImg(field: any): string {
-    return !field.piece ? '../assets/chess_board_pieces/transparent.png' : '../assets/chess_board_pieces/' + field.piece.name + '.svg'
+    return !field.piece ? '../assets/chess_board_pieces/transparent.png' : '../assets/chess_board_pieces/' + field.piece.name + '.svg';
+  }
+
+  setImg(){
+    return '../assets/chess_board_pieces/transparent.png';
   }
 
   moveFigure(event: Event, field: any) {
