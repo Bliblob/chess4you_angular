@@ -25,7 +25,7 @@ export class TurnService {
 
   getTurn(lobbyUUID: string, playerUUID: string, position: Position): Observable<Movement>{
     let params = new HttpParams().set('lobbyUuid', lobbyUUID).set('playerUuid', playerUUID).set('position', JSON.stringify(position));
-    return this.http.get<Movement>(url + '/getBoard', {params});
+    return this.http.get<Movement>(url + '/getTurn', {params});
   }
 
   doTurn(lobbyUUID: string, playerUUID: string, position: string): Observable<ChessBoard>{
