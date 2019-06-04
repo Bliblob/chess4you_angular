@@ -3,6 +3,11 @@ export interface ILobby {
     StartGame: Boolean;
     PlayerOne: IPlayer;
     PlayerTwo: IPlayer;
+
+    getListLobbys();
+    getLobby();
+    initLobby();
+    join();
 }
 
 export interface IPlayer {

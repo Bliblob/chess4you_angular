@@ -1,18 +1,22 @@
-<div class="container">
-  <div class="notification has-background-white">
-      <h2 class="title is-2">Lobby's</h2>
-  </div>
+<div style="height: 50px;">
 </div>
-<div class="container has-text-white">
-    <div class="notification has-background-info">
-      <div class="tile is-parent is-vertical">
-        <article *ngFor="let Lobby of ListLobby"  class="tile is-child notification is-warning has-background-info has-text-white">
-            <p class="title">Lobby: {{Lobby.Name}}</p>
-            <p class="subtitle">Players:</p>
-            <p>1. {{Lobby.PlayerOne.Name}}</p>
-            <p>2. {{Lobby.PlayerTwo?.Name}}</p>
-            <button [disabled]="Lobby.PlayerTwo?.Name" [id]="Lobby.Name" (click)="joinLobby($event)" class="button is-info is-inverted is-outlined">{{Lobby.PlayerOne.Name && Lobby.PlayerTwo?.Name ? "Lobby is full" : "Join Lobby"}}</button>
-        </article>
-      </div>
+  <div class="columns is-mobile is-centered">
+    <div class="column has-background-info has-text-centered">
+      <h1 class="title is-2 has-text-white">Lobby's</h1>
     </div>
   </div>
+<div style="height: 20px;">
+</div>
+  <article *ngFor="let Lobby of ListLobby"  class="tile is-child notification is-warning has-background-info has-text-white">
+    <div class="container has-text-white">
+      <div class="notification has-background-info">
+        <div class="tile is-parent is-vertical">
+          <p class="title">Lobby: {{Lobby.Name}}</p>
+          <p class="subtitle">Players:</p>
+          <p class="subtitle">1. {{Lobby.PlayerOne.Name}}</p>
+          <p class="subtitle">2. {{Lobby.PlayerTwo?.Name}}</p>
+          <button [disabled]="Lobby.PlayerTwo?.Name" [id]="Lobby.Name" (click)="joinLobby($event)" class="button is-info is-inverted is-outlined">{{Lobby.PlayerOne.Name && Lobby.PlayerTwo?.Name ? "Lobby is full" : "Join Lobby"}}</button>
+        </div>
+      </div>
+    </div>
+  </article>

@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { ILobby } from './data-structure/Lobby';
+import { Lobby } from './interfaces/lobby';
 
 const url = 'http://localhost:8080';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LobbyService {
+export class LobbyService implements Lobby{
 
   constructor(private http: HttpClient) { }
 
-  getListLobbys(): Observable<ILobby[]> {
-    return this.http.get<ILobby[]>(url + '/getAllLobby');
+  getListLobbys(): Observable<Lobby[]> {
+    return this.http.get<Lobby[]>(url + '/getAllLobby');
   }
 
   getLobby(lobbyUuid: string): Observable<ILobby> {
