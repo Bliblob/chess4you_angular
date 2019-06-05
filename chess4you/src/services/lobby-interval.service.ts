@@ -11,13 +11,6 @@ export class LobbyIntervalService implements ILobby {
   PlayerOne: import("../data-structure/Lobby").IPlayer;
   PlayerTwo: import("../data-structure/Lobby").IPlayer;
 
-  interval(){
-    this.getListLobbys();
-    this.getLobby();
-    this.initLobby();
-    this.join();
-  }
-
   getListLobbys() {
   }
   getLobby() {
@@ -25,6 +18,13 @@ export class LobbyIntervalService implements ILobby {
   initLobby() {
   }
   join() {
+  }
+  
+  interval(){
+    this.getListLobbys();
+    this.getLobby();
+    this.initLobby();
+    this.join();
   }
 
 constructor() {setInterval(()=> { this.interval() }, 3000); }
