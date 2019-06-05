@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LobbyService } from '../lobby.service';
-import { ILobby } from 'src/data-structure/Lobby';
+import { Lobby } from 'src/data-structure/Lobby';
 import { ActivatedRoute } from '@angular/router';
 import { ModalData } from 'src/data-structure/ModalData';
 import { MessageData } from 'src/data-structure/MessageData';
@@ -13,8 +13,8 @@ import { LobbyData } from 'src/data-structure/LobbyData';
 })
 export class DashboardComponent implements OnInit {
 
-  lobby: ILobby;
-  listLobby: ILobby[];
+  lobby: Lobby;
+  listLobby: Lobby[];
 
   modal: ModalData = new ModalData();
   messageData: MessageData = new MessageData('', false);
@@ -89,10 +89,10 @@ export class DashboardComponent implements OnInit {
   }
 
   // search method
-  getLobbyWithSpace(ListLobby: ILobby[]): ILobby {
-    let Lobby: ILobby;
+  getLobbyWithSpace(ListLobby: Lobby[]): Lobby {
+    let Lobby: Lobby;
 // tslint:disable-next-line: prefer-const
-    let tmpListLobby: ILobby[] = [];
+    let tmpListLobby: Lobby[] = [];
     if (this.isNotEmpty(ListLobby)) {
       ListLobby.forEach( element => {
         if (element.PlayerTwo == null) {
@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit {
   }
 
   // message method
-  joinWorked(Lobby: ILobby, modal: Boolean) {
+  joinWorked(Lobby: Lobby, modal: Boolean) {
       const isJoined = Lobby === null ? false : true;
       this.messageData = this.setMessage(isJoined);
       this.modal.isMessageActive = true;

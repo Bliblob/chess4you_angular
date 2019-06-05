@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LobbyService } from '../lobby.service';
-import { ILobby } from '../data-structure/Lobby';
+import { Lobby } from '../data-structure/Lobby';
 
 @Component({
   selector: 'app-lobby-search',
@@ -9,8 +9,8 @@ import { ILobby } from '../data-structure/Lobby';
 })
 export class LobbySearchComponent implements OnInit {
 
-  ListLobby: ILobby[] = new Array();
-  Lobby: ILobby;
+  ListLobby: Lobby[] = new Array();
+  Lobby: Lobby;
   isLoading = false;
   isModalActive = false;
   buttonJoinStatus = true;
@@ -22,7 +22,7 @@ export class LobbySearchComponent implements OnInit {
     this.getListLobby();
   }
   getListLobby(): void {
-    this.lobbyService.getListLobbys()
+    this.lobbyService.getListLobbies()
     .subscribe(
       data => this.ListLobby = data
     );

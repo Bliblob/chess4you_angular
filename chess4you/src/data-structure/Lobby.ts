@@ -1,16 +1,11 @@
-export interface ILobby {
+export class Lobby {
     Name: string;
     StartGame: Boolean;
-    PlayerOne: IPlayer;
-    PlayerTwo: IPlayer;
-
-    getListLobbys();
-    getLobby();
-    initLobby();
-    join();
+    PlayerOne: Player;
+    PlayerTwo: Player;
 }
 
-export interface IPlayer {
+export class Player {
     Id: string;
     Name: string;
     Color: String;

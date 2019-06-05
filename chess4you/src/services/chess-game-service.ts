@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+  import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Field } from 'src/data-structure/chess/field/Field';
@@ -11,7 +11,7 @@ const url = 'http://localhost:8080';
   providedIn: 'root'
 })
 
-export class ChessGameServiceService {
+export class ChessGameService {
 
   constructor(private http: HttpClient) { }
 
@@ -20,3 +20,4 @@ export class ChessGameServiceService {
     return this.http.get<ChessBoard>(url + '/getBoard', {params});
   }
 }
+

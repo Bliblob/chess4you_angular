@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LobbyService } from 'src/lobby.service';
-import { ILobby } from 'src/data-structure/Lobby';
+import { Lobby } from 'src/data-structure/Lobby';
 import { ActivatedRoute } from '@angular/router';
-import { ChessGameServiceService } from 'src/services/chess-game-service.service';
+import { ChessGameService } from 'src/services/chess-game-service.service';
 import { TurnService } from 'src/services/turn.service';
 import { Movement } from 'src/data-structure/chess/Movement';
 import { Player } from '@angular/core/src/render3/interfaces/player';
@@ -24,12 +24,12 @@ export class ChessGameComponent implements OnInit {
   currPos: string;
   newPos: string;
   movements: Movement[] = [];
-  lobby: ILobby;
+  lobby: Lobby;
   info: Info;
   counter: Date;
 
   constructor(
-    private gameService: ChessGameServiceService,
+    private gameService: ChessGameService,
     private turnService: TurnService,
     private lobbyService: LobbyService,
     private route: ActivatedRoute
