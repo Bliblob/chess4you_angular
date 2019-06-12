@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LobbyService } from 'src/lobby.service';
 import { Lobby } from 'src/data-structure/Lobby';
 import { ActivatedRoute } from '@angular/router';
-import { ChessGameService } from 'src/services/chess-game-service.service';
+import { ChessGameService } from 'src/services/chess-game-service';
 import { TurnService } from 'src/services/turn.service';
 import { Movement } from 'src/data-structure/chess/Movement';
 import { Player } from '@angular/core/src/render3/interfaces/player';

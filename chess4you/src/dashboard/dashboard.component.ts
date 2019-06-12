@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
 
   // modal specific methods
   async searchLobby() {
-    await this.lobbyService.getListLobbys()
+    await this.lobbyService.getListLobbies()
     .toPromise()
     .then(
       data => {

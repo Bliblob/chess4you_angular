@@ -1,15 +1,13 @@
-import { Info } from "src/chess-game/chess-game.component";
+import { Info, ChessBoard } from "src/chess-game/chess-game.component";
 import { Field } from "src/data-structure/chess/field/Field";
 import { Observable } from "rxjs";
-import { Server } from "https";
 import { Url } from "url";
-import { Player } from "src/data-structure/Lobby";
 import { Movement } from "src/data-structure/chess/Movement";
 
 export interface IGameService {
 
    info: Observable<Info>;
-   board: Observable<Field[][]>;
+   board: Observable<ChessBoard[][]>;
 
    connect(urlServer: Url,uuidLobby: string, uuidPlayer: string);
 

@@ -11,18 +11,18 @@
       <div class="card">
         <header class="card-header">
           <div>
-            <p align="center" class="title is-4">Lobby: {{lobby?.Name}}</p>
+            <p align="center" class="title is-4">Lobby: {{(GameService.info | async)?.GameName}}</p>
           </div>
         </header>
         <header class="card-header">
           <div style="padding: 30px;">
-            <span class="tag is-success is-large">{{lobby?.PlayerOne?.Name}}</span>&nbsp;
+            <span class="tag is-grey is-large">{{(GameService.info | async)?.FirstPlayer.Name}}</span>&nbsp;
             <span class="tag is-large is-black">VS</span>&nbsp;
-            <span class="tag is-grey is-large">{{lobby?.PlayerTwo?.Name}}</span><br>
+            <span class="tag is-grey is-large">{{(GameService.info | async)?.SecondPlayer.Name}}</span><br>
           </div>
         </header>
         <header class="card-header">
-          <p class="title is-5 has-text-danger">Fehlermeldungen</p><br>
+          <p class="title is-5 has-text-info">Have fun!</p>
         </header>
       </div>
     </div>
