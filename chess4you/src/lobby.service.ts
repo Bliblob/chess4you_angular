@@ -3,7 +3,14 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Lobby } from './data-structure/Lobby';
 
-const urlLobbyServer = '172.16.1.198:8082';
+const urlLobbyServer = 'https://172.16.1.198:8082';
+console.log(urlLobbyServer);
+
+const options = {
+  headers: new HttpHeaders({
+    'Content-Type' : 'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -23,20 +30,10 @@ export class LobbyService {
   }
 
   initLobby(playerName: string, color: string): Observable<Lobby> {
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type' : 'application/json'
-      })
-    };
     return this.http.post<Lobby>(urlLobbyServer + '/initLobby', {playerName, color}, options);
   }
 
   join(lobbyUuid: string, playerName: string): Observable<Lobby> {
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type' : 'application/json'
-      })
-    };
     return this.http.post<Lobby>(urlLobbyServer + '/joinLobby', {lobbyUuid, playerName}, options);
   }
 
