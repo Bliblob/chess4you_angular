@@ -103,6 +103,8 @@ export class ChessGameComponent implements OnInit {
         console.log('newPos: ' + this.newPos);
         this.changeFigure(this.currPos, this.newPos);
         this.resetBackgroundColor(this.movements);
+      }else {
+        let error = 'Kein valider Zug!';
       }
     } 
   }
