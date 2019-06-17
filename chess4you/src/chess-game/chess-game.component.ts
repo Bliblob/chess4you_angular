@@ -85,10 +85,6 @@ export class ChessGameComponent implements OnInit {
     }
   }
 
-  setImg(){
-    return '../assets/chess_board_pieces/transparent.png';
-  }
-
   moveFigure(event: Event, field: any) {
     if (!field.piece){
       alert('Bitte wählen Sie eine Figur aus.');
