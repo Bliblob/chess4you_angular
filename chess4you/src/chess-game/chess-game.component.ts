@@ -77,8 +77,12 @@ export class ChessGameComponent implements OnInit {
     return y + ',' + x;
   }
 
-  getImg(field: any): string {
-    return !field.piece ? '../assets/chess_board_pieces/transparent.png' : '../assets/chess_board_pieces/' + field.piece.name + '.svg';
+  getImg(field: any, currPiece: any): string {
+    if(!currPiece) {
+      return '../assets/chess_board_pieces/' + field.piece.name + '.svg';
+    } else {
+      return '../assets/chess_board_pieces/transparent.png';
+    }
   }
 
   setImg(){
