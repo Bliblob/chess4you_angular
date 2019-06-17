@@ -9,13 +9,13 @@ export interface IGameService {
    info: Observable<Info>;
    board: Observable<ChessBoard[][]>;
 
-   connect(urlServer: Url,uuidLobby: string, uuidPlayer: string);
+   connect(urlGameServer: Url,uuidLobby: string, uuidPlayer: string);
 
-   getInfo(urlServer: Url,uuidLobby: string, uuidPlayer: string);
+   getInfo(urlGameServer: Url,uuidLobby: string, uuidPlayer: string);
 
-   getBoard(urlServer: Url,uuidLobby: string, uuidPlayer: string);
+   getBoard(urlGameServer: Url,uuidLobby: string, uuidPlayer: string);
 
-   getTurn(urlServer: Url, uuidPlayer: string, uuidLobby: string, position: Position);
+   getTurn(urlGameServer: Url, uuidPlayer: string, uuidLobby: string, position: Position);
 
-   doTurn(urlServer: Url, uuidPlayer: string, uuidLobby: string, movement: Movement);
+   doTurn(urlGameServer: Url, uuidPlayer: string, uuidLobby: string, movement: Movement);
 }

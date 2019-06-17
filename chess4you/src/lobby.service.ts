@@ -3,7 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Lobby } from './data-structure/Lobby';
 
-const url = 'http://localhost:8080';
+const urlLobbyServer = '172.16.1.198:8082';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +13,13 @@ export class LobbyService {
   constructor(private http: HttpClient) { }
 
   getListLobbies(): Observable<Lobby[]> {
-    return this.http.get<Lobby[]>(url + '/getAllLobby');
+    return this.http.get<Lobby[]>(urlLobbyServer + '/getAllLobby');
   } 
 
   getLobby(lobbyUuid: string): Observable<Lobby> {
     const params = new HttpParams()
     .set('lobbyUuid', lobbyUuid);
-    return this.http.get<Lobby>(url + '/getLobby', {params});
+    return this.http.get<Lobby>(urlLobbyServer + '/getLobby', {params});
   }
 
   initLobby(playerName: string, color: string): Observable<Lobby> {
@@ -28,7 +28,7 @@ export class LobbyService {
         'Content-Type' : 'application/json'
       })
     };
-    return this.http.post<Lobby>(url + '/initLobby', {playerName, color}, options);
+    return this.http.post<Lobby>(urlLobbyServer + '/initLobby', {playerName, color}, options);
   }
 
   join(lobbyUuid: string, playerName: string): Observable<Lobby> {
@@ -37,7 +37,7 @@ export class LobbyService {
         'Content-Type' : 'application/json'
       })
     };
-    return this.http.post<Lobby>(url + '/joinLobby', {lobbyUuid, playerName}, options);
+    return this.http.post<Lobby>(urlLobbyServer + '/joinLobby', {lobbyUuid, playerName}, options);
   }
 
 }
